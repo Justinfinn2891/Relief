@@ -10,3 +10,4 @@ const pool = mysql.createPool({
 const result = await pool.query("SELECT *FROM relief_users")
 console.log(result)
 
+s
