@@ -1,0 +1,84 @@
+create database Relief;
+Use Relief;
+
+CREATE TABLE RELIEF_ID(
+
+	R_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Exam_Name varchar(255)
+
+);
+
+CREATE TABLE Relief_Questions(
+
+	Question_ID INT PRIMARY KEY AUTO_INCREMENT,
+    R_ID INT NOT NULL, 
+    Question varchar(255),
+    FOREIGN KEY(R_ID) References Relief_ID(R_ID)
+
+);
+
+CREATE TABLE Relief_Answers(
+
+	Answer_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Question_ID INT NOT NULL,
+    Answer varchar(255),
+    FOREIGN KEY(Question_ID) References Relief_Questions(Question_ID)
+
+);
+
+CREATE TABLE Relief_Users(
+
+	User_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Username varchar(255) NOT NULL UNIQUE,
+    Password varchar(255) NOT NULL, 
+    Address varchar(255) NOT NULL,
+    SSN INT, -- Not Necessarily Required,
+    Zipcode INT NOT NULL
+    
+);
+
+ALTER TABLE Relief_Answers
+ADD COLUMN User_ID INT NOT NULL,
+ADD FOREIGN KEY (User_ID) REFERENCES Relief_Users(User_ID);
+
+INSERT INTO Relief_Users(Username, Password, Address, SSN, Zipcode)VALUES(
+
+	'Spongebob',
+    'Il0vePatr1ck32',
+    'Bikini Bottom',
+    '223994242',
+    '42051' 
+    
+);
+
+INSERT INTO Relief_Users(Username, Password, Address, SSN, Zipcode)VALUES(
+
+	'Mickeymouse',
+    'M1nnie32', 
+    'Clubhouse',
+    '55599921',
+    '52301' 
+    
+);
+
+INSERT INTO Relief_Users(Username, Password, Address, SSN, Zipcode)VALUES(
+
+	'Jack Frost',
+    'Fr0sty420', 
+    'Northpole',
+    '300110101',
+    '85721' 
+    
+);
+
+INSERT INTO Relief_Users(Username, Password, Address, SSN, Zipcode)VALUES(
+
+	'Spongebob',
+    'Il0vePatr1ck32',
+    'Bikini Bottom',
+    '223994242',
+    '42051' 
+    
+);
+
+Select * From Relief_Users;
