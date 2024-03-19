@@ -1,7 +1,7 @@
-import mysql from 'mysql2'
+let mysql = require('mysql2')
  
 // ADDS SECURITY TO POOL VARAIBLE 
-import dotenv from 'dotenv'
+let dotenv = require('dotenv')
 dotenv.config()
 
 const pool = mysql.createPool({
@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 }).promise()
 
 // GET ACCESS TO ALL INFORMATION FOR THAT TABLE
-export async function getNotes(){
+/*export async function getNotes(){
     const [rows] = await pool.query("SELECT * FROM relief_users")
     return rows
 }
@@ -50,3 +50,4 @@ console.log(notes)
 
 
 
+*/

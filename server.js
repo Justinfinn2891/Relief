@@ -1,12 +1,12 @@
 // CHANGED IT FROM CONST EXPRESS TO IMPORT FOR CONSOLE ERRORS (CAN BE CHANGED BACK)
-import express from 'express'
+const express = require('express')
 const server = express()
 const port = 3000
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-import {getNote, getNotes, createNote} from './database.js'
+let {getNote, getNotes, createNote} = require('./database.js')
 
-var indexPath = require('path')
+const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
 
@@ -28,3 +28,27 @@ server.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
 })
 
+server.post("/loginsubmit", (req, res) => {
+    let data = req.body;
+    console.log(data);
+})
+
+/*server.post('/', (req, res) => {
+    let data = req.body;
+    pool.connect((err) => {
+        if (err) throw err;
+        pool.query(`INSERT INTO relief_users(username, password) VALUES ('${data.username}', '${data.password}')`, (err) => {
+            if (err) throw err;
+        });
+    });
+    pool.connect((err) => {
+        if (err) throw err;
+        pool.query('SELECT * FROM USERS', (err, result) => {
+            if (err) throw err;
+            console.log(result);
+        });
+    });
+    res.sendFile(indexPath.resolve(__dirname + '/../dist/index.html'))
+});
+
+*/
