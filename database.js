@@ -1,29 +1,63 @@
 let mysql = require('mysql2')
+
  
 // ADDS SECURITY TO POOL VARAIBLE 
 let dotenv = require('dotenv')
 dotenv.config()
 
-const pool = mysql.createPool({
+var con = mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE
-}).promise()
+});
+
+con.connect(function(err) {
+    if(err) throw err;
+    con.query("SELECT * FROM relief_users", function (err, result, fields) {
+        if(err) throw err;
+        console.log(result);
+    });
+});
+
+
+
+async function sendLogin(Username, Password, res){
+    try {
+        
+        const [rows] = await con.promise().query('SELECT * FROM relief_login WHERE Username = ? AND Password = ?', [Username, Password]);
+        if (rows.length === 1) {
+            
+            return 1; 
+        } else {
+            
+        }
+    } catch (error) {
+        console.error('Error executing query:', error);
+        
+    }
+}
+
+/*
+async function sendLogin(Username, password){
+    const[result] = await con.query(`
+    INSERT INTO relief_login(Username, Password)
+    Values(?,?)
+    `, [Username, Password])
+    return result
+}
+*/
 
 // GET ACCESS TO ALL INFORMATION FOR THAT TABLE
-/*export async function getNotes(){
-    const [rows] = await pool.query("SELECT * FROM relief_users")
+async function getNotes(){
+    const [rows] = await con.query("SELECT * FROM relief_users")
     return rows
 }
 
-const notes = await getNotes()
-console.log(notes)
-
 // GET ACCESS TO PARTIAL INFORMATION FROM THAT TABLE
 
-export async function getNote(User_id){
-    const[rows] = await pool.query(`
+async function getNote(User_id){
+    const[rows] = await con.query(`
     SELECT *
     FROM relief_users
     WHERE User_id = ?
@@ -31,13 +65,12 @@ export async function getNote(User_id){
     return rows[0]
 }
 
-const note = await getNote(3)
-console.log(note)
+
 
 // ADDING INFORMATION TO A TABLE
 
-export async function createNote(Username, Password, Address, SSN, Zipcode){
-    const[result] = await pool.query(`
+async function createNote(Username, Password, Address, SSN, Zipcode){
+    const[result] = await con.query(`
     INSERT INTO relief_users(Username, Password, Address, SSN, Zipcode)
     Values(?,?,?,?,?)
     `, [Username, Password, Address, SSN, Zipcode])
@@ -45,9 +78,13 @@ export async function createNote(Username, Password, Address, SSN, Zipcode){
 }
 
 //const newNote = await createNote('Peterpan', 'A1e424255f', '844 Bearfeet DR', '552051333', '95100')
-console.log(notes)
 
 
+module.exports = {
+    getNotes,
+    getNote,
+    createNote,
+    sendLogin
+};
 
 
-*/
