@@ -30,6 +30,7 @@ async function sendLogin(Username, Password, res){
             
             return 1; 
         } else {
+            return 0; 
             
         }
     } catch (error) {
@@ -38,15 +39,15 @@ async function sendLogin(Username, Password, res){
     }
 }
 
-/*
-async function sendLogin(Username, password){
-    const[result] = await con.query(`
+
+async function createLogin(Username, Password){
+    const[result] = await con.promise().query(`
     INSERT INTO relief_login(Username, Password)
     Values(?,?)
     `, [Username, Password])
     return result
 }
-*/
+
 
 // GET ACCESS TO ALL INFORMATION FOR THAT TABLE
 async function getNotes(){
@@ -84,7 +85,8 @@ module.exports = {
     getNotes,
     getNote,
     createNote,
-    sendLogin
+    sendLogin,
+    createLogin
 };
 
 

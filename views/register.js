@@ -1,13 +1,10 @@
-const loginForm = document.getElementById("login-form");
-const loginButton = document.getElementById("login-form-submit");
-const loginErrorMsg = document.getElementById("login-error-msg");
-const loginError = document.getElementById("login-error-msg-holder");
-
-
+const registerForm = document.getElementById("register-form");
+const registerButton = document.getElementById("register-button");
 
 const sendDataToServer = async (username, password) => {
     try {
-        const response = await fetch('/loginsubmit', {
+        
+        const response = await fetch('/registersubmit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,18 +16,12 @@ const sendDataToServer = async (username, password) => {
             const result = await response.json();
             if (result === 1) {
                 alert("You have successfully logged in.");
-                location.href = "home.html";
-                if(result === 0)
-                {
-                    alert("Wrong username or password");
-                    location.reload(); 
-                }
-            } else  {
+                location.reload();
+            } else {
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;
             }
         } else {
-            
             console.error('Failed to send data to server:', response.statusText);
         }
     } catch (error) {
@@ -38,10 +29,12 @@ const sendDataToServer = async (username, password) => {
     }
 };
 
-loginButton.addEventListener("click", (e) => {
+registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
+    const username = registerForm.username.value;
+    const password = registerForm.password.value;
+    console.log(username);
+    console.log(password);
     sendDataToServer(username, password);
+    //sendDataToServer(username, password);
 });
-

@@ -4,7 +4,7 @@ const server = express()
 const port = 3001
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-let {getNote, getNotes, createNote, sendLogin} = require('./database.js')
+let {getNote, getNotes, createNote, sendLogin, createLogin} = require('./database.js')
 const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
@@ -29,6 +29,13 @@ server.post("/loginsubmit", async (req, res) => {
     console.log(username);
     console.log(password);
 
+});
+
+server.post("/registersubmit", async (req, res) => {
+    let { username, password } = req.body;
+    const log = await createLogin(username, password);
+    console.log(username);
+    console.log(password);
 });
 
 
