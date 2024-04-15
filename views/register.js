@@ -16,7 +16,7 @@ const sendDataToServer = async (username, password) => {
             const result = await response.json();
             if (result === 1) {
                 alert("You have successfully logged in.");
-                location.reload();
+                location.href = "login.html";
             } else {
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;

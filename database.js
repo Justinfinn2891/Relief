@@ -45,7 +45,7 @@ async function createLogin(Username, Password){
     INSERT INTO relief_login(Username, Password)
     Values(?,?)
     `, [Username, Password])
-    return result
+    return 1; 
 }
 
 
