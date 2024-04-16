@@ -38,16 +38,30 @@ async function sendLogin(Username, Password, res){
         
     }
 }
-
-
 async function createLogin(Username, Password){
+    try {
+        const[result] = await con.promise().query(`
+            INSERT INTO relief_login(Username, Password)
+            VALUES (?,?)
+        `, [Username, Password]);
+        return 1; // Successfully inserted
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return 0; // Duplicate entry
+        } else {
+            throw error; // Other errors
+        }
+    }
+}
+
+/*async function createLogin(Username, Password){
     const[result] = await con.promise().query(`
     INSERT INTO relief_login(Username, Password)
     Values(?,?)
     `, [Username, Password])
     return 1; 
 }
-
+*/
 
 // GET ACCESS TO ALL INFORMATION FOR THAT TABLE
 async function getNotes(){

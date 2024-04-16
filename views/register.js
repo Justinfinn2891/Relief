@@ -15,14 +15,16 @@ const sendDataToServer = async (username, password) => {
         if (response.ok) {
             const result = await response.json();
             if (result === 1) {
-                alert("You have successfully logged in.");
+                alert("You have successfully registered.");
                 location.href = "login.html";
-            } else {
+            } else if(result === 0) {
+                alert("The password you entered has already been used");
+            location.reload(); 
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;
             }
         } else {
-            console.error('Failed to send data to server:', response.statusText);
+            //console.error('Failed to send data to server:', response.statusText);
         }
     } catch (error) {
         console.error('Error sending data to server:', error);

@@ -35,6 +35,7 @@ server.post("/registersubmit", async (req, res) => {
     let { username, password } = req.body;
     const log = await createLogin(username, password);
     res.json(log);
+    console.log(log); 
     console.log(username);
     console.log(password);
 });

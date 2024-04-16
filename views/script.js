@@ -18,14 +18,16 @@ const sendDataToServer = async (username, password) => {
         if (response.ok) {
             const result = await response.json();
             if (result === 1) {
+                const email = prompt("Please enter your email for verification:");
                 alert("You have successfully logged in.");
                 location.href = "home.html";
-                if(result === 0)
+            }
+            else if(result === 0)
                 {
                     alert("Wrong username or password");
                     location.reload(); 
                 }
-            } else  {
+            else  {
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;
             }
