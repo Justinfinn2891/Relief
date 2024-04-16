@@ -4,7 +4,7 @@ const server = express()
 const port = 3001
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-let {getNote, getNotes, createNote, sendLogin, createLogin} = require('./database.js')
+let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID} = require('./database.js')
 const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
@@ -22,24 +22,36 @@ server.listen(port, () => {
 });
 
 server.post("/loginsubmit", async (req, res) => {
-    let { username, password } = req.body;
-    const log = await sendLogin(username, password)
-    res.json(log);
+    let { email, username, password } = req.body;
+    const log = await sendLogin(email, username, password)
+    const yes = await findID(email);
+    res.json({ loginResponse: log, idResponse: yes });
+    console.log(yes);
     console.log(log); 
+    console.log(email);
     console.log(username);
     console.log(password);
 
 });
 
 server.post("/registersubmit", async (req, res) => {
-    let { username, password } = req.body;
-    const log = await createLogin(username, password);
+    let { email, username, password } = req.body;
+    const log = await createLogin(email, username, password);
     res.json(log);
     console.log(log); 
+    console.log(email);
     console.log(username);
     console.log(password);
 });
 
+server.post("/profilesubmit", async (req, res) => {
+    let { age, weight, height, address, zipcode, ssn, login_id, verification } = req.body;
+    const log = await createProfile(age, weight, height, address, zipcode, ssn, login_id, verification);
+    res.json(log);
+    console.log(age);
+    console.log(weight);
+    
+});
 
 /*server.post('/', (req, res) => {
     let data = req.body;

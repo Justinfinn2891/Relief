@@ -1,15 +1,15 @@
 const registerForm = document.getElementById("register-form");
 const registerButton = document.getElementById("register-button");
 
-const sendDataToServer = async (username, password) => {
+const sendDataToServer = async (email, username, password) => {
     try {
-        
+
         const response = await fetch('/registersubmit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, username, password })
         });
 
         if (response.ok) {
@@ -18,7 +18,7 @@ const sendDataToServer = async (username, password) => {
                 alert("You have successfully registered.");
                 location.href = "login.html";
             } else if(result === 0) {
-                alert("The password you entered has already been used");
+                alert("The username you entered has already been used");
             location.reload(); 
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;
@@ -33,10 +33,12 @@ const sendDataToServer = async (username, password) => {
 
 registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const email = registerForm.email.value;
     const username = registerForm.username.value;
     const password = registerForm.password.value;
+    console.log(email);
     console.log(username);
     console.log(password);
-    sendDataToServer(username, password);
+    sendDataToServer(email, username, password);
     //sendDataToServer(username, password);
 });

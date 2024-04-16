@@ -22,10 +22,10 @@ con.connect(function(err) {
 
 
 
-async function sendLogin(Username, Password, res){
+async function sendLogin(Email, Username, Password, res){
     try {
         
-        const [rows] = await con.promise().query('SELECT * FROM relief_login WHERE Username = ? AND Password = ?', [Username, Password]);
+        const [rows] = await con.promise().query('SELECT * FROM relief_login WHERE Email = ? AND Username = ? AND Password = ?', [Email, Username, Password]);
         if (rows.length === 1) {
             
             return 1; 
@@ -38,12 +38,41 @@ async function sendLogin(Username, Password, res){
         
     }
 }
-async function createLogin(Username, Password){
+async function createLogin(email, username, password){
     try {
-        const[result] = await con.promise().query(`
-            INSERT INTO relief_login(Username, Password)
-            VALUES (?,?)
-        `, [Username, Password]);
+        const[result] = await con.promise().query(
+            `INSERT INTO relief_login(email, username, password)
+            VALUES (?,?,?)`
+        , [email, username, password]);
+        return 1; // Successfully inserted
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return 0; // Duplicate entry
+        } else {
+            throw error; // Other errors
+        }
+    }
+}
+
+async function findID(email) {
+    try {
+        const [rows, fields] = await con.promise().query(
+            'SELECT login_id FROM relief_login WHERE email = ?', [email]);
+        // Extract the login_id value from the first row, if available
+        const loginId = rows.length > 0 ? rows[0].login_id : null;
+        return loginId; // Return the login_id value
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Rethrow the error to handle it at the caller level
+    }
+}
+
+async function createProfile(age, weight, height, address, zipcode, ssn, login_id, verification){
+    try {
+        const[result] = await con.promise().query(
+            `INSERT INTO relief_users(Age, Weight, Height, Address, Zipcode, SSN, login_id, verification)
+            VALUES (?,?,?,?,?,?,?,?)`
+        , [age, weight, height, address, zipcode, ssn, login_id, verification]);
         return 1; // Successfully inserted
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
@@ -100,7 +129,9 @@ module.exports = {
     getNote,
     createNote,
     sendLogin,
-    createLogin
+    createLogin,
+    createProfile,
+    findID
 };
 
 
