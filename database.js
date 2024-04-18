@@ -67,12 +67,13 @@ async function findID(email) {
     }
 }
 
-async function createProfile(age, weight, height, address, zipcode, ssn, login_id, verification){
+async function createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name) {
     try {
-        const[result] = await con.promise().query(
-            `INSERT INTO relief_users(Age, Weight, Height, Address, Zipcode, SSN, login_id, verification)
-            VALUES (?,?,?,?,?,?,?,?)`
-        , [age, weight, height, address, zipcode, ssn, login_id, verification]);
+        const [result] = await con.promise().query(
+            `INSERT INTO relief_users(Age, Weight, Height, Address, Zipcode, SSN, login_id, verification, phone, name)
+            VALUES (?,?,?,?,?,?,?,?,?,?)`,
+            [age, weight, height, address, zipcode, ssn, login_id, verification, phone, name]
+        );
         return 1; // Successfully inserted
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
@@ -82,7 +83,44 @@ async function createProfile(age, weight, height, address, zipcode, ssn, login_i
         }
     }
 }
+async function findVerification(id)
+{
+    try {
+        const [rows, fields] = await con.promise().query(
+            'SELECT verification FROM relief_users WHERE login_id = ?', [id]);
+        // Extract the login_id value from the first row, if available
+        const verification = rows.length > 0 ? rows[0].verification : null;
+        console.log(verification);
+        return verification; // Return the login_id value
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Rethrow the error to handle it at the caller level
+    }
+}
 
+async function fetchUserProfile(loginId, callback) {
+    // Execute the SQL query to select user profile data along with username, email, and address
+    const query = `
+    SELECT r.age, r.weight, r.height, r.address, r.zipcode, r.ssn, r.phone, r.name, l.username, l.email
+    FROM relief_users AS r
+    INNER JOIN relief_login AS l ON r.login_id = l.login_id
+    WHERE r.login_id = ?`;
+    
+    con.query(query, [loginId], (error, results) => {
+      if (error) {
+        // If there's an error, call the callback with the error
+        return callback(error, null);
+      }
+      // If successful, call the callback with the user profile data
+      if (results.length > 0) {
+        const userProfile = results[0]; // Assuming only one row will be returned
+        callback(null, userProfile);
+      } else {
+        // If no user found with the provided login_id
+        callback(new Error('User not found'), null);
+      }
+    });
+}
 /*async function createLogin(Username, Password){
     const[result] = await con.promise().query(`
     INSERT INTO relief_login(Username, Password)
@@ -131,7 +169,9 @@ module.exports = {
     sendLogin,
     createLogin,
     createProfile,
-    findID
+    findID,
+    findVerification,
+    fetchUserProfile
 };
 
 

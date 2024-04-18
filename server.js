@@ -4,7 +4,7 @@ const server = express()
 const port = 3001
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID} = require('./database.js')
+let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile} = require('./database.js')
 const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
@@ -45,13 +45,34 @@ server.post("/registersubmit", async (req, res) => {
 });
 
 server.post("/profilesubmit", async (req, res) => {
-    let { age, weight, height, address, zipcode, ssn, login_id, verification } = req.body;
-    const log = await createProfile(age, weight, height, address, zipcode, ssn, login_id, verification);
+    let { age, weight, height, address, zipcode, ssn, login_id, verification, phone, name } = req.body;
+    const log = await createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name);
     res.json(log);
     console.log(age);
     console.log(weight);
     
 });
+
+server.post("/profile", async (req, res) => {
+    let { id } = req.body;
+    const log = await findVerification(id);
+    res.json(log); 
+});
+
+server.post('/profileinfo', (req, res) => {
+    // Get the login_id from the request body
+    const loginId = req.body.login_id;
+    console.log("hola");
+    // Call the fetchUserProfile function to get the user profile
+    fetchUserProfile(loginId, (error, userProfile) => {
+      if (error) {
+        // If there's an error, send a 404 status and error message
+        return res.status(404).json({ error: 'User not found' });
+      }
+      // If successful, send the user profile data as a JSON response
+      res.json(userProfile);
+    });
+  });
 
 /*server.post('/', (req, res) => {
     let data = req.body;

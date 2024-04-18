@@ -1,8 +1,7 @@
 const profileSubmit = document.getElementById("profile-form-submit");
 const profileForm = document.getElementById("profile-form");
-import { idInfo } from './script.js';
 
-const sendDataToServer = async (age, weight, height, address, zipcode, ssn, login_id, verification) => {
+const sendDataToServer = async (age, weight, height, address, zipcode, ssn, login_id, verification, phone, name) => {
     try {
 
         const response = await fetch('/profilesubmit', {
@@ -10,7 +9,7 @@ const sendDataToServer = async (age, weight, height, address, zipcode, ssn, logi
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ age, weight, height, address, zipcode, ssn, login_id, verification })
+            body: JSON.stringify({age, weight, height, address, zipcode, ssn, login_id, verification, phone, name})
         });
 
         if (response.ok) {
@@ -18,9 +17,9 @@ const sendDataToServer = async (age, weight, height, address, zipcode, ssn, logi
             if (result === 1) {
                 alert("You have successfully made your profile.");
                 location.href = "profilepage.html";
-            } else if(result === 0) {
+            } else if (result === 0) {
                 alert("The information wasn't filled out correctly");
-            location.reload(); 
+                location.reload();
                 loginError.style.display = "grid";
                 loginErrorMsg.style.opacity = 1;
             }
@@ -34,15 +33,16 @@ const sendDataToServer = async (age, weight, height, address, zipcode, ssn, logi
 
 profileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    console.log(window.idResult);
+    const idResult = localStorage.getItem('idResult');
+    const name = profileForm.name.value;
+    const phone = profileForm.phone.value;
     const age = profileForm.age.value;
     const weight = profileForm.weight.value;
     const height = profileForm.height.value;
     const address = profileForm.address.value;
     const zipcode = profileForm.zipcode.value;
     const ssn = profileForm.ssn.value;
-    const login_id = idInfo;
     const verification = 1;
-    sendDataToServer(age, weight, height, address, zipcode, ssn, login_id, verification);
-
-
+    sendDataToServer(age, weight, height, address, zipcode, ssn, idResult, verification, phone, name);
 });
