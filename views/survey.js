@@ -53,6 +53,7 @@ surveyForm.addEventListener("submit", function (e) {
     let healthGuard = 0;
     let vitalityHealth = 0;
     let vitalCare = 0;
+    let veteran = 0;
 // QUESTION 1
     if(q1 === 'A'){
         healthGuard++;
@@ -84,6 +85,7 @@ surveyForm.addEventListener("submit", function (e) {
     }
     if(q5 === 'A')
     {
+        veteran += 15; 
         location.href = "veteran.html"
     }
     else
