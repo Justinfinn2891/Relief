@@ -1,13 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Relief Survey!</title>
+  <link rel="icon" type="image/x-icon" href="/releaf.png">
+  <link href="surv.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <h1>Survey</h1>
-    <p>Welcome to our survey!</p>
-    <a href="home.html">Back to Home</a>
+  <h1><i>Relief Survey!</i></h1>
+
+  <!-- Create Form -->
+  <form id="form">
+
+    <!-- Details -->
+
+    <div class="form-control">
+      <label>
+        Do you wish for a plan that covers several dependents?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="recommed-a">
+        <input type="radio" id="recommed-a" name="recommed" value="A">A) Yes
+      </label>
+      <label for="recommed-b">
+        <input type="radio" id="recommed-b" name="recommed" value="B">B) No
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        Is someone, like a spouse, helping make payments?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="payment-a">
+        <input type="radio" id="payment-a" name="payment" value="A">A) Yes
+      </label>
+      <label for="payment-b">
+        <input type="radio" id="payment-b" name="payment" value="B">B) No
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        Are you disabled in any capacity?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="disabled-a">
+        <input type="radio" id="disabled-a" name="disabled" value="A">A) Yes
+      </label>
+      <label for="disabled-b">
+        <input type="radio" id="disabled-b" name="disabled" value="B">B) No
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        Do you desire alternative therapies?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="therapy-a">
+        <input type="radio" id="therapy-a" name="therapy" value="A">A) Yes
+      </label>
+      <label for="therapy-b">
+        <input type="radio" id="therapy-b" name="therapy" value="B">B) No
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        Do you commonly consume nicotine products?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="nicotine-a">
+        <input type="radio" id="nicotine-a" name="nicotine" value="A">A) Yes
+      </label>
+      <label for="nicotine-b">
+        <input type="radio" id="nicotine-b" name="nicotine" value="B">B) No
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        Do you have any physical or medical conditions?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="medical-a">
+        <input type="radio" id="medical-a" name="medical" value="A">A) Yes
+      </label>
+      <label for="medical-b">
+        <input type="radio" id="medical-b" name="medical" value="B">B) No
+      </label>
+
+    </div>
+
+    <div class="form-control">
+        <label>
+          What is your estimated yearly salary?
+        </label>
+        <!-- Input Type Radio Button -->
+        <label for="salary-a">
+          <input type="radio" id="salary-a" name="salary" value="A">A) $100,000+
+        </label>
+        <label for="salary-b">
+          <input type="radio" id="salary-b" name="salary" value="B">B) $75,000 - $100,000
+        </label>
+        <label for="salary-c">
+            <input type="radio" id="salary-c" name="salary" value="C">C) $50,000 - $75,000 
+          </label>
+          <label for="salary-d">
+            <input type="radio" id="salary-d" name="salary" value="D">D) $0 - $50,000
+          </label>
+  
+      </div>
+
+    <div class="form-control">
+      <label>
+        What deductible do you wish to start with?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="deductible-a">
+        <input type="radio" id="deductible-a" name="deductible" value="A">A) $500
+      </label>
+      <label for="deductible-b">
+        <input type="radio" id="deductible-b" name="deductible" value="B">B) $1000
+      </label>
+      <label for="deductible-c">
+        <input type="radio" id="deductible-c" name="deductible" value="C">C) $2000
+      </label>
+      <label for="deductible-d">
+        <input type="radio" id="deductible-d" name="deductible" value="D">D) $5000
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label>
+        How would you rate your overall health?
+      </label>
+      <!-- Input Type Radio Button -->
+      <label for="health-a">
+        <input type="radio" id="health-a" name="health" value="A">A) Excellent
+      </label>
+      <label for="health-b">
+        <input type="radio" id="health-b" name="health" value="B">B) Good
+      </label>
+      <label for="health-c">
+        <input type="radio" id="health-c" name="health" value="C">C) Fair
+      </label>
+      <label for="health-d">
+        <input type="radio" id="health-d" name="health" value="D">D) Poor
+      </label>
+    </div>
+
+    <!-- Multi-line Text Input Control -->
+    <button type="submit" value="submit">Submit</button>
+  </form>
 </body>
+
 </html>
