@@ -62,3 +62,18 @@ button {
     margin-top: 50px;
     margin-bottom: 20px;
 }
+
+#submit-button {
+    background-color: #05c46b; /* Green background color */
+    color: #fff; /* White text color */
+    font-size: 24px; /* Large font size */
+    padding: 10px 20px; /* Padding for better appearance */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Hover effect for the submit button */
+  #submit-button:hover {
+    background-color: #04a45c; /* Darker green on hover */
+  }
