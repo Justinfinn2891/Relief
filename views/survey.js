@@ -1,13 +1,14 @@
+
 const surveyForm = document.getElementById("form");
 
-const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId) => {
+const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification) => {
     try {
         const response = await fetch('/surveysubmit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId})
+            body: JSON.stringify({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification})
         });
 
         if (response.ok) {
@@ -19,13 +20,13 @@ const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_he
            if(result === "veteran"){
                 location.href = "veteran.html";
             }
-            else if(result === "vitalityHealth"){
+            if(result === "vitalityHealth"){
                 location.href = "vitalityhealth.html";
             }
-            else if(result === "vitalCare"){
+            if(result === "vitalCare"){
                 location.href = "vitalcare.html";
             }
-            else (result === "healthGuard")
+            if(result === "healthGuard")
                 location.href = "HealthGuard.html";
             
             
@@ -165,6 +166,7 @@ surveyForm.addEventListener("submit", function (e) {
       }
       const loginId = localStorage.getItem('idResult');
   
-
-    sendDatatoServer(q1, q2, q3, q4, q5, q6, q7, q8,q9,q10, user_healthcare, loginId);
+      let verification = 1;
+      console.log(q1);
+    sendDatatoServer(q1, q2, q3, q4, q5, q6, q7, q8,q9,q10, user_healthcare, loginId, verification);
 });

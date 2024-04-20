@@ -98,6 +98,21 @@ async function findVerification(id)
     }
 }
 
+async function findSurveyVerification(id)
+{
+    try {
+        const [rows, fields] = await con.promise().query(
+            'SELECT verification FROM relief_answers WHERE login_id = ?', [id]);
+        // Extract the login_id value from the first row, if available
+        const verification = rows.length > 0 ? rows[0].verification : null;
+        console.log(verification);
+        return verification; // Return the login_id value
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Rethrow the error to handle it at the caller level
+    }
+}
+
 async function fetchUserProfile(loginId, callback) {
     // Execute the SQL query to select user profile data along with username, email, and address
     const query = `
@@ -122,14 +137,36 @@ async function fetchUserProfile(loginId, callback) {
     });
 }
 
-async function createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId) {
+async function createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification) {
     try {
+        
         const [result] = await con.promise().query(
-            `INSERT INTO relief_answers(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, user_id)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
-            [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId]
+            `INSERT INTO relief_answers(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, user_id, verification)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification]
+            
         );
         return user_healthcare; // Successfully inserted
+        
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return 0; // Duplicate entry
+        } else {
+            throw error; // Other errors
+        }
+    }
+}
+
+async function modifySurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification) {
+    try {     
+            const [result] = await con.promise().query(
+                `UPDATE relief_answers 
+                 SET q1 = ?, q2 = ?, q3 = ?, q4 = ?, q5 = ?, q6 = ?, q7 = ?, q8 = ?, q9 = ?, q10 = ?, user_healthcare = ?, verification = ?
+                 WHERE user_id = ?`,
+                [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, verification, loginId]
+            );
+            return user_healthcare; // Successfully inserted
+
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
             return 0; // Duplicate entry
@@ -189,7 +226,9 @@ module.exports = {
     findID,
     findVerification,
     fetchUserProfile,
-    createSurvey
+    createSurvey,
+    findSurveyVerification,
+    modifySurvey
 };
 
 

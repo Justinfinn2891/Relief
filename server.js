@@ -4,7 +4,7 @@ const server = express()
 const port = 3001
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile, createSurvey} = require('./database.js')
+let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile, createSurvey, findSurveyVerification, modifySurvey} = require('./database.js')
 const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
@@ -62,6 +62,7 @@ server.post("/profile", async (req, res) => {
 server.post('/profileinfo', (req, res) => {
     // Get the login_id from the request body
     const loginId = req.body.login_id;
+    
     console.log("hola");
     // Call the fetchUserProfile function to get the user profile
     fetchUserProfile(loginId, (error, userProfile) => {
@@ -75,11 +76,28 @@ server.post('/profileinfo', (req, res) => {
   });
 
   server.post("/surveysubmit", async (req, res) => {
-    let { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId } = req.body;
-    const log = await createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId);
-    log = req.body;
-    res.json(log);
+    let { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification} = req.body;
     
+        console.log(q1);
+        if(verification === undefined)
+        {
+            const log = await createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification); 
+            res.json(log)
+        }
+        else
+        {
+            const log = await modifySurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification); 
+            res.json(log)
+        }
+        
+       
+    /*
+    else{
+        const log = await createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification);
+    }
+    */
+
+
    
     
 });
