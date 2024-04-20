@@ -6,6 +6,7 @@ const port = 3001
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
 let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile, createSurvey, findSurveyVerification, modifySurvey} = require('./database.js')
 const indexPath = require('path')
+const { verify } = require('crypto')
 
 server.use(express.static(__dirname + '/views'))
 server.use(express.json());
@@ -59,6 +60,7 @@ server.post("/profile", async (req, res) => {
     res.json(log); 
 });
 
+
 server.post('/profileinfo', (req, res) => {
     // Get the login_id from the request body
     const loginId = req.body.login_id;
@@ -76,19 +78,25 @@ server.post('/profileinfo', (req, res) => {
   });
 
   server.post("/surveysubmit", async (req, res) => {
-    let { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification} = req.body;
-    
-        console.log(q1);
-        if(verification === undefined)
-        {
+    let { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId} = req.body;
+    {
+            let verification = await findSurveyVerification(loginId);
+            console.log("yes");
+            console.log(verification);
+            if(verification === 0)
+            {
             const log = await createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification); 
-            res.json(log)
-        }
-        else
-        {
+            res.json(log);
+            }
+
+            if(verification >= 1){
             const log = await modifySurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification); 
-            res.json(log)
+            res.json(log);
+    
+            }
         }
+    
+
         
        
     /*

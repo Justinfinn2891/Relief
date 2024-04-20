@@ -98,21 +98,31 @@ async function findVerification(id)
     }
 }
 
-async function findSurveyVerification(id)
-{
+async function findSurveyVerification(id) {
     try {
         const [rows, fields] = await con.promise().query(
-            'SELECT verification FROM relief_answers WHERE login_id = ?', [id]);
-        // Extract the login_id value from the first row, if available
-        const verification = rows.length > 0 ? rows[0].verification : null;
-        console.log(verification);
-        return verification; // Return the login_id value
+            'SELECT verification FROM relief_answers WHERE user_id = ?', [id]);
+        
+        // Check if rows are returned
+        if (rows.length > 0) {
+            // Check if verification is not null
+            if (rows[0].verification !== null) {
+                const verification = rows[0].verification;
+               
+                return verification;
+            } else {
+                console.log('Verification is null.');
+                return null; // Or return any other default value if verification is null
+            }
+        } else {
+            console.log('No matching user_id found.');
+            return 0; // Return 0 if no matching user_id is found
+        }
     } catch (error) {
         console.error('Error:', error);
         throw error; // Rethrow the error to handle it at the caller level
     }
 }
-
 async function fetchUserProfile(loginId, callback) {
     // Execute the SQL query to select user profile data along with username, email, and address
     const query = `
@@ -140,6 +150,7 @@ async function fetchUserProfile(loginId, callback) {
 async function createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification) {
     try {
         
+        verification = 2;
         const [result] = await con.promise().query(
             `INSERT INTO relief_answers(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, user_id, verification)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,

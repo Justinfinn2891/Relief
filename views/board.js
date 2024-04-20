@@ -27,3 +27,4 @@ function myFunction() {
         location.href = "profile.html";
   }
 }
+

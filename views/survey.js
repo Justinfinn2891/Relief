@@ -1,14 +1,14 @@
 
 const surveyForm = document.getElementById("form");
 
-const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification) => {
+const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId) => {
     try {
         const response = await fetch('/surveysubmit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId, verification})
+            body: JSON.stringify({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId})
         });
 
         if (response.ok) {
@@ -166,7 +166,7 @@ surveyForm.addEventListener("submit", function (e) {
       }
       const loginId = localStorage.getItem('idResult');
   
-      let verification = 1;
+   
       console.log(q1);
-    sendDatatoServer(q1, q2, q3, q4, q5, q6, q7, q8,q9,q10, user_healthcare, loginId, verification);
+    sendDatatoServer(q1, q2, q3, q4, q5, q6, q7, q8,q9,q10, user_healthcare, loginId);
 });
