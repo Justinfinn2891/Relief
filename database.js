@@ -121,6 +121,23 @@ async function fetchUserProfile(loginId, callback) {
       }
     });
 }
+
+async function createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId) {
+    try {
+        const [result] = await con.promise().query(
+            `INSERT INTO relief_answers(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, user_id)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId]
+        );
+        return user_healthcare; // Successfully inserted
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return 0; // Duplicate entry
+        } else {
+            throw error; // Other errors
+        }
+    }
+}
 /*async function createLogin(Username, Password){
     const[result] = await con.promise().query(`
     INSERT INTO relief_login(Username, Password)
@@ -171,7 +188,8 @@ module.exports = {
     createProfile,
     findID,
     findVerification,
-    fetchUserProfile
+    fetchUserProfile,
+    createSurvey
 };
 
 

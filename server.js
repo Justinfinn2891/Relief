@@ -4,7 +4,7 @@ const server = express()
 const port = 3001
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
-let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile} = require('./database.js')
+let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile, createSurvey} = require('./database.js')
 const indexPath = require('path')
 
 server.use(express.static(__dirname + '/views'))
@@ -73,6 +73,17 @@ server.post('/profileinfo', (req, res) => {
       res.json(userProfile);
     });
   });
+
+  server.post("/surveysubmit", async (req, res) => {
+    let { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId } = req.body;
+    const log = await createSurvey(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_healthcare, loginId);
+    log = req.body;
+    res.json(log);
+    
+   
+    
+});
+
 
 /*server.post('/', (req, res) => {
     let data = req.body;
