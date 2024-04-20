@@ -124,11 +124,12 @@ async function findSurveyVerification(id) {
     }
 }
 async function fetchUserProfile(loginId, callback) {
-    // Execute the SQL query to select user profile data along with username, email, and address
+    // Execute the SQL query to select user profile data along with username, email, address, and healthcare information
     const query = `
-    SELECT r.age, r.weight, r.height, r.address, r.zipcode, r.ssn, r.phone, r.name, l.username, l.email
+    SELECT r.age, r.weight, r.height, r.address, r.zipcode, r.ssn, r.phone, r.name, l.username, l.email, a.user_healthcare, a.verification
     FROM relief_users AS r
     INNER JOIN relief_login AS l ON r.login_id = l.login_id
+    LEFT JOIN relief_answers AS a ON r.login_id = a.user_id
     WHERE r.login_id = ?`;
     
     con.query(query, [loginId], (error, results) => {
