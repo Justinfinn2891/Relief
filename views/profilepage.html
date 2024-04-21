@@ -83,9 +83,9 @@
 
           <h5 class="w3-opacity"><b>Emergency Contacts</b></h5>
           <div class="w3-container">
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>N/A</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>N/A</p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>N/A</p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><span id="eAddress">Primary Address here</span></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><span id="eEmail">Primary Address here</span></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><span id="ePhone">Primary Address here</span></p>
             <hr>
         </div>
         <div class="w3-container">
@@ -140,6 +140,9 @@ async function fetchUserProfile(loginId) {
     document.getElementById('username').innerText = userData.username;
     document.getElementById('name').innerText = userData.name;
     document.getElementById('user_healthcare').innerText = userData.user_healthcare
+    document.getElementById('eAddress').innerText = userData.eAddress;
+    document.getElementById('eEmail').innerText = userData.eEmail;
+    document.getElementById('ePhone').innerText = userData.ePhone;
     console.log(userData);
 
     const progressBar = document.getElementById('progressBar');

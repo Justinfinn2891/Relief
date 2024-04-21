@@ -46,12 +46,21 @@ server.post("/registersubmit", async (req, res) => {
 });
 
 server.post("/profilesubmit", async (req, res) => {
-    let { age, weight, height, address, zipcode, ssn, login_id, verification, phone, name } = req.body;
-    const log = await createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name);
-    res.json(log);
-    console.log(age);
-    console.log(weight);
-    
+    console.log("hello");
+    try {
+        let { age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail } = req.body;
+        console.log(eAddress);
+        console.log(ePhone);
+        console.log(eEmail);
+        console.log(weight);
+        const log = await createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail);
+        res.json(log);
+        console.log(age);
+        console.log(weight);
+    } catch (error) {
+        console.error("Error processing profile submission:", error);
+        res.status(500).json({ error: "An error occurred while processing your profile submission." });
+    }
 });
 
 server.post("/profile", async (req, res) => {

@@ -160,7 +160,7 @@ surveyForm.addEventListener("submit", function (e) {
       } else if (vitalCare > healthGuard && vitalCare > vitalityHealth && vitalCare > veteran) {
         user_healthcare = "vitalCare";
       } else if (veteran > healthGuard && veteran > vitalityHealth && veteran > vitalCare) {
-        user_healthcare = "veteran";
+        user_healthcare = "VeteranCare";
       } else {
         user_healthcare = "There is a tie or all values are equal.";
       }

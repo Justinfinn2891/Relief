@@ -66,13 +66,13 @@ async function findID(email) {
         throw error; // Rethrow the error to handle it at the caller level
     }
 }
-
-async function createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name) {
+async function createProfile(age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail) {
     try {
+        console.log(age);
         const [result] = await con.promise().query(
-            `INSERT INTO relief_users(Age, Weight, Height, Address, Zipcode, SSN, login_id, verification, phone, name)
-            VALUES (?,?,?,?,?,?,?,?,?,?)`,
-            [age, weight, height, address, zipcode, ssn, login_id, verification, phone, name]
+            `INSERT INTO relief_users(Age, Weight, Height, Address, Zipcode, SSN, login_id, verification, phone, name, eAddress, ePhone, eEmail)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail]
         );
         return 1; // Successfully inserted
     } catch (error) {
@@ -126,7 +126,7 @@ async function findSurveyVerification(id) {
 async function fetchUserProfile(loginId, callback) {
     // Execute the SQL query to select user profile data along with username, email, address, and healthcare information
     const query = `
-    SELECT r.age, r.weight, r.height, r.address, r.zipcode, r.ssn, r.phone, r.name, l.username, l.email, a.user_healthcare, a.verification
+    SELECT r.age, r.weight, r.height, r.address, r.zipcode, r.ssn, r.phone, r.name, r.eAddress, r.ePhone, r.eEmail, l.username, l.email, a.user_healthcare, a.verification
     FROM relief_users AS r
     INNER JOIN relief_login AS l ON r.login_id = l.login_id
     LEFT JOIN relief_answers AS a ON r.login_id = a.user_id

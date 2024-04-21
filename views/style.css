@@ -3,14 +3,14 @@ html {
   width: 100%;
 }
 
-body{
-  color:whitesmoke;
-  background-image: url("medical.jpg");
+body {
+  color: whitesmoke;
+  background-image: url("menu1.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size:cover;
+  background-size: cover;
   margin: 0;
-  height:100%;
+  height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   display: grid;
   justify-items: center;
@@ -26,6 +26,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
 .grid {
   display: grid;
   align-items: center;
@@ -34,8 +35,8 @@ a {
 }
 
 .card {
-  padding:3vh;
-  margin-left:1vh;
+  padding: 3vh;
+  margin-top: 100px;
   text-align: center;
   text-decoration: none;
   border: 1px solid #2a31f8;
@@ -46,25 +47,24 @@ a {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
-  color:transparent;
-  min-width:200px;
+  color: transparent;
+  min-width: 300px;
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color:white;
-  border-color:#50bc39;
+  color: white;
+  border-color: #50bc39;
   box-shadow: 0 0 200px #50bc39;
-  background-image:none;
+  background-image: none;
   transition: 0.5s ease;
 }
 
 .card p {
-  font-size: 2vh;
-  text-align: center;  
-  color:inherit;
-  
+  font-size: 3.5vh;
+  text-align: center;
+  color: inherit;
 }
 
 #main-holder {
@@ -76,17 +76,19 @@ a {
   background-color: whitesmoke;
   border-radius: 7px;
   box-shadow: 0px 0px 5px 2px black;
-  min-width:250px;
+  min-width: 250px;
 }
-.forgot-password{
-  margin:0;
-  text-decoration:underline;
-  color:#50bc39;
+
+.forgot-password {
+  margin: 0;
+  text-decoration: underline;
+  color: #50bc39;
 }
-.login{
-  margin:0;
-  text-decoration:underline;
-  color:#50bc39;
+
+.login {
+  margin: 0;
+  text-decoration: underline;
+  color: #50bc39;
   background-color: black;
   border-radius: 50px;
   padding: 1vh;
@@ -97,10 +99,10 @@ a {
   height: 100%;
   justify-items: center;
   align-items: center;
-  display:none;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  display: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #login-error-msg {
@@ -142,8 +144,8 @@ a {
 }
 
 #login-form-submit {
-  width: 100%;
-  padding: 7px;
+  width: 300px; /* Adjusted button width */
+  padding: 15px; /* Adjusted padding */
   border: none;
   border-radius: 5px;
   color: white;
@@ -151,11 +153,67 @@ a {
   background-color: #3a3a3a;
   cursor: pointer;
   outline: none;
+  transition: transform 0.2s ease; /* Added animation */
 }
 
-#login-header{
+#login-header {
   color: #3a3a3a;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.center {
+  width: 300px; /* Adjusted button width */
+  height: 100px; /* Adjusted button height */
+  margin-top: 40px;
+}
+
+.btn {
+  width: 300px; /* Adjusted button width */
+  height: 100px; /* Adjusted button height */
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid Transparent;
+  outline: none;
+  transition: 1s ease-in-out, transform 0.2s ease; /* Added animation */
+  background-color: white; /* Changed button color to white */
+}
+
+.btn:hover {
+  transform: scale(1.1); /* Added scale animation */
+}
+
+svg {
+  position: absolute;
+  fill: none;
+  left: 0;
+  top: 0;
+  stroke: #000000; /* Changed SVG stroke color to black */
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn span {
+  color: black; /* Changed text color to black */
+  font-size: 18px;
+  font-weight: 100;
 }

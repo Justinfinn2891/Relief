@@ -1,7 +1,7 @@
 const profileSubmit = document.getElementById("profile-form-submit");
 const profileForm = document.getElementById("profile-form");
 
-const sendDataToServer = async (age, weight, height, address, zipcode, ssn, login_id, verification, phone, name) => {
+const sendDataToServer = async (age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail) => {
     try {
 
         const response = await fetch('/profilesubmit', {
@@ -9,7 +9,7 @@ const sendDataToServer = async (age, weight, height, address, zipcode, ssn, logi
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({age, weight, height, address, zipcode, ssn, login_id, verification, phone, name})
+            body: JSON.stringify({age, weight, height, address, zipcode, ssn, login_id, verification, phone, name, eAddress, ePhone, eEmail})
         });
 
         if (response.ok) {
@@ -31,6 +31,7 @@ const sendDataToServer = async (age, weight, height, address, zipcode, ssn, logi
     }
 };
 
+
 profileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log(window.idResult);
@@ -43,6 +44,11 @@ profileForm.addEventListener("submit", async (e) => {
     const address = profileForm.address.value;
     const zipcode = profileForm.zipcode.value;
     const ssn = profileForm.ssn.value;
+    const eAddress = profileForm.eAddress.value;
+    const eEmail = profileForm.eEmail.value;
+    const ePhone = profileForm.ePhone.value; 
+
+    console.log(eAddress);  
     const verification = 1;
-    sendDataToServer(age, weight, height, address, zipcode, ssn, idResult, verification, phone, name);
+    sendDataToServer(age, weight, height, address, zipcode, ssn, idResult, verification, phone, name, eAddress, ePhone, eEmail);
 });
