@@ -5,12 +5,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veteran Image</title>
+  <style>
+    /* CSS for styling the text */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('yessss1.jpg'); /* Replace 'your-background-image.jpg' with the path to your background image */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* This ensures that the background image remains fixed as the user scrolls */
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9); /* Adding transparency to the background to make the text readable */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .selected-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Veteran Image</h1>
-  <img src="HealthGuard.png" alt="Veteran Image">
-  <a href="home.html">Go to Home</a>
+  <div class="container">
+ 
+    <img src="HealthGuard.png" alt="Veteran Image">
+    <p class="selected-text">Based on your answers, you have been selected for HealthGuard! This health-care is perfect for the price given. It supplies you with amazing health opportunities. Unfortunately, some alternative plans are not available.</p>
+    <a href="home.html">Go to Home</a>
+  </div>
 </body>
 
 </html>

@@ -7,10 +7,66 @@
   <title>Relief Survey!</title>
   <link rel="icon" type="image/x-icon" href="/releaf.png">
   <link href="surv.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      background-image: url('yessss1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* This ensures that the background image remains fixed as the user scrolls */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.7); /* Adding transparency to the background to make the text readable */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-style: italic;
+    }
+
+    .form-control {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    #submit-button {
+      display: block;
+      margin: 0 auto;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #submit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-  <h1><i>Relief Survey!</i></h1>
+  
 
   <!-- Create Form -->
   <form id="form" action="/surveysubmit" method="post">
