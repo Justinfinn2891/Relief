@@ -17,7 +17,7 @@ const sendDatatoServer = async (q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, user_he
             console.log(result);
             console.log(result);
             console.log(result);
-           if(result === "veteran"){
+           if(result === "VeteranCare"){
                 location.href = "veteran.html";
             }
             if(result === "vitalityHealth"){
