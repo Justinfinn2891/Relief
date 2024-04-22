@@ -1,7 +1,7 @@
 // CHANGED IT FROM CONST EXPRESS TO IMPORT FOR CONSOLE ERRORS (CAN BE CHANGED BACK)
 const express = require('express')
 const server = express()
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 3001;
 
 // IMPORTING FUNCTIONS FROM DATABASE.JS FILE 
 let {getNote, getNotes, createNote, sendLogin, createLogin, createProfile, findID, findVerification, fetchUserProfile, createSurvey, findSurveyVerification, modifySurvey} = require('./database.js')
