@@ -4,7 +4,7 @@ healthcare plan for their needs through a series of questions.
 ## Team Members
 
 - Justin Finn: Responsible for database and backend development.
-- Gabriel Speer: Responsible for front-end development.
+- Gabriel Speer: Responsible for front-end development. 
 - Jesse Warren: Responsible for backend and server development.
 
 Relief is built off of a series of applications and languages to help form the
