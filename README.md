@@ -1,6 +1,6 @@
 ![Relief Logo](/views/name2.png)
 
-[Watch the Demo Video]([https://www.youtube.com/watch?v=your-video-id](https://youtu.be/ehNMsBZPjbc))
+[Watch the Demo Video](https://youtu.be/ehNMsBZPjbc)
 
 # Introducing Relief: Your Personal Healthcare Navigator
 
