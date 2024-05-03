@@ -1,5 +1,7 @@
 ![Relief Logo](/views/name2.png)
 
+[Watch the Demo Video](https://www.youtube.com/watch?v=your-video-id)
+
 # Introducing Relief: Your Personal Healthcare Navigator
 
 Relief is more than just a healthcare website; it's your personalized guide to navigating the complexities of healthcare plans. With a user-friendly interface and robust backend infrastructure, Relief seamlessly matches users with tailored healthcare options, ensuring peace of mind and optimal coverage.
@@ -40,4 +42,3 @@ Relief is more than just a healthcare website; it's your personalized guide to n
 
 With Relief, the future of healthcare navigation is at your fingertips. Let us guide you towards a healthier, happier tomorrow.
 
-[Watch the Demo Video](https://www.youtube.com/watch?v=your-video-id)
