@@ -1,4 +1,4 @@
-![Relief Logo](/views/name.png)
+![Relief Logo](/views/name2.png)
 
 # Introducing Relief: Your Personal Healthcare Navigator
 
