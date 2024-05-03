@@ -4,7 +4,7 @@ healthcare plan for their needs through a series of questions.
 ## Team Members
 
 - Justin Finn: Responsible for database and backend development.
-- Gabriel Speer: Responsible for front-end development.
+- Gabriel Speer: Responsible for front-end development. 
 - Jesse Warren: Responsible for backend and server development.
 
 Relief is built off of a series of applications and languages to help form the
@@ -16,4 +16,6 @@ The usage of this website:
 - You can login or set up a new account if you don't have one already
 - The intended purpose of this website is for it to ask you a series of questions
   that will be saved to the database. It'll then return to you a
-  potential useful health-care plan designed for your personal use. 
+  potential useful health-care plan designed for your personal use.
+  
+https://github.com/Justinfinn2891/Healthcare
